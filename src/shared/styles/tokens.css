@@ -1,0 +1,122 @@
+/* ====================================================================
+   GARAGE SYSTEM — design tokens
+   Extraído de garage-system-Prototipo/V2-GarageSystem.html — não duplicar
+   valores de cor/tipografia fora daqui; sempre referenciar var(--token).
+   ==================================================================== */
+:root{
+  --bg:#EEF0F2;
+  --surface:#FFFFFF;
+  --surface-2:#E6E9EC;
+  --surface-hover:#F5F6F8;
+  --border:#D6DBDF;
+  --border-strong:#B9C1C7;
+  --ink:#161A1D;
+  --ink-muted:#5B6870;
+  --ink-faint:#8B969C;
+  --on-surface-inverse:#F3F5F6;
+
+  --accent:#D9560B;
+  --accent-strong:#B8460A;
+  --accent-soft:#FCE6D6;
+  --on-accent:#FFFFFF;
+
+  --steel:#3E6E96;
+  --steel-strong:#2E5578;
+  --steel-soft:#DFEAF3;
+
+  --success:#2F8F5B;
+  --success-soft:#DFF3E8;
+  --warning:#B8860C;
+  --warning-soft:#FBF1D8;
+  --danger:#B23A2A;
+  --danger-soft:#F8E1DC;
+
+  --st-aberta:#3E6E96;       --st-aberta-soft:#DFEAF3;
+  --st-diag:#2E8F86;         --st-diag-soft:#DDF2EF;
+  --st-aguardando:#B8860C;   --st-aguardando-soft:#FBF1D8;
+  --st-execucao:#D9560B;     --st-execucao-soft:#FCE6D6;
+  --st-concluida:#2F8F5B;    --st-concluida-soft:#DFF3E8;
+  --st-cancelada:#8A7F76;    --st-cancelada-soft:#EDEAE6;
+
+  --rail-bg:#181513;
+  --rail-ink:#E7E1DB;
+  --rail-ink-dim:#948B82;
+  --rail-active:#2A211B;
+  --rail-border:#2C2622;
+
+  --shadow-sm:0 1px 2px rgba(15,16,17,.08);
+  --shadow-md:0 10px 28px -12px rgba(15,16,17,.28);
+  --shadow-lg:0 24px 56px -18px rgba(15,16,17,.42);
+
+  --radius-sm:8px;
+  --radius-md:12px;
+  --radius-lg:18px;
+
+  --font-display:'Big Shoulders Display', system-ui, sans-serif;
+  --font-body:'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono:'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1214;
+    --surface:#171B1E;
+    --surface-2:#1E2327;
+    --surface-hover:#232931;
+    --border:#2A3136;
+    --border-strong:#3A434A;
+    --ink:#EDEFF1;
+    --ink-muted:#9BA6AD;
+    --ink-faint:#6C7680;
+    --on-surface-inverse:#161A1D;
+
+    --accent:#FF7A33;
+    --accent-strong:#FF9A5C;
+    --accent-soft:rgba(255,122,51,.16);
+    --on-accent:#1B0F06;
+
+    --steel:#6FA8D8;
+    --steel-strong:#8FC0E8;
+    --steel-soft:rgba(111,168,216,.14);
+
+    --success:#4FBF86;
+    --success-soft:rgba(79,191,134,.14);
+    --warning:#E4B33D;
+    --warning-soft:rgba(228,179,61,.14);
+    --danger:#E8735F;
+    --danger-soft:rgba(232,115,95,.14);
+
+    --st-aberta:#6FA8D8;       --st-aberta-soft:rgba(111,168,216,.14);
+    --st-diag:#4FC2B6;         --st-diag-soft:rgba(79,194,182,.14);
+    --st-aguardando:#E4B33D;   --st-aguardando-soft:rgba(228,179,61,.14);
+    --st-execucao:#FF7A33;     --st-execucao-soft:rgba(255,122,51,.16);
+    --st-concluida:#4FBF86;    --st-concluida-soft:rgba(79,191,134,.14);
+    --st-cancelada:#A69C90;    --st-cancelada-soft:rgba(166,156,144,.14);
+
+    --rail-bg:#0C0A09;
+    --rail-border:#231D19;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1214; --surface:#171B1E; --surface-2:#1E2327; --surface-hover:#232931;
+  --border:#2A3136; --border-strong:#3A434A; --ink:#EDEFF1; --ink-muted:#9BA6AD; --ink-faint:#6C7680;
+  --on-surface-inverse:#161A1D;
+  --accent:#FF7A33; --accent-strong:#FF9A5C; --accent-soft:rgba(255,122,51,.16); --on-accent:#1B0F06;
+  --steel:#6FA8D8; --steel-strong:#8FC0E8; --steel-soft:rgba(111,168,216,.14);
+  --success:#4FBF86; --success-soft:rgba(79,191,134,.14);
+  --warning:#E4B33D; --warning-soft:rgba(228,179,61,.14);
+  --danger:#E8735F; --danger-soft:rgba(232,115,95,.14);
+  --st-aberta:#6FA8D8; --st-aberta-soft:rgba(111,168,216,.14);
+  --st-diag:#4FC2B6; --st-diag-soft:rgba(79,194,182,.14);
+  --st-aguardando:#E4B33D; --st-aguardando-soft:rgba(228,179,61,.14);
+  --st-execucao:#FF7A33; --st-execucao-soft:rgba(255,122,51,.16);
+  --st-concluida:#4FBF86; --st-concluida-soft:rgba(79,191,134,.14);
+  --st-cancelada:#A69C90; --st-cancelada-soft:rgba(166,156,144,.14);
+  --rail-bg:#0C0A09; --rail-border:#231D19;
+  color-scheme: dark;
+}
+:root[data-theme="light"]{ color-scheme: light; }
