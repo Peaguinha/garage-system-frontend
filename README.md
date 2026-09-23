@@ -1,6 +1,6 @@
 # Garage System — Frontend
 
-Interface web do Garage System, em React + Vite. Consome a API REST do [`backend/`](../backend). Parâmetro visual e funcional: [`garage-system-Prototipo/V2-GarageSystem.html`](../../garage-system-Prototipo/V2-GarageSystem.html).
+Interface web do Garage System, em React + Vite. Consome a API REST do backend, que vive em um repositório separado: [garage-system-backend](https://github.com/Peaguinha/garage-system-backend). Parâmetro visual e funcional: `garage-system-Prototipo/V2-GarageSystem.html`, no hub do projeto no Obsidian.
 
 Plano completo (stack, estrutura, divisão de features por pessoa): ver **Garage System - Fase 2 Frontend.md** no hub do projeto no Obsidian.
 
@@ -12,7 +12,7 @@ cp .env.example .env   # ajuste VITE_API_URL se o backend não estiver em localh
 npm run dev
 ```
 
-Precisa do `backend/` rodando em paralelo (ver `backend/README.md`) para o login e as chamadas de API funcionarem.
+Precisa do backend rodando em paralelo (clone e instruções em [garage-system-backend](https://github.com/Peaguinha/garage-system-backend)) para o login e as chamadas de API funcionarem.
 
 ## Estrutura
 
