@@ -10,7 +10,6 @@ import {
   atualizarStatus,
   codigoOrdem,
   criarOrdem,
-  fmtDate,
   fmtMoney,
   initials,
   listarMecanicos,
@@ -18,7 +17,7 @@ import {
   listarVeiculos,
   totais,
 } from "./ordensApi";
-import { Modal, Plate, StatusPill } from "./ui";
+import { LinhaOrdem, Modal, Plate, StatusPill } from "./ui";
 import { useToast } from "./useToast";
 
 // Feature F4 — Ordens de Serviço (lista): kanban, lista e abertura de ordem.
@@ -283,40 +282,6 @@ function CartaoOrdem({ ordem, arrastavel, arrastando, onAbrir, onDragStart, onDr
         <span className="kcard-value mono">{fmtMoney(total)}</span>
       </div>
     </button>
-  );
-}
-
-function LinhaOrdem({ ordem, onAbrir }) {
-  const { total } = totais(ordem);
-  const v = ordem.veiculo;
-  return (
-    <div className="drow drow-body clickable" onClick={onAbrir}>
-      <div className="dcell mono dcell-title">{codigoOrdem(ordem.id)}</div>
-      <div className="dcell">
-        <span className="lbl">Veículo</span>
-        {v && <Plate placa={v.placa} />} <span className="dcell-sub">{v ? `${v.marca} ${v.modelo}` : ""}</span>
-      </div>
-      <div className="dcell">
-        <span className="lbl">Proprietário</span>
-        {v?.cliente?.nome ?? "—"}
-      </div>
-      <div className="dcell">
-        <span className="lbl">Mecânico</span>
-        {ordem.mecanico?.nome ?? "—"}
-      </div>
-      <div className="dcell">
-        <span className="lbl">Status</span>
-        <StatusPill status={ordem.status} />
-      </div>
-      <div className="dcell mono tabular">
-        <span className="lbl">Valor</span>
-        {fmtMoney(total)}
-      </div>
-      <div className="dcell dcell-sub">
-        <span className="lbl">Data</span>
-        {fmtDate(ordem.dataAbertura)}
-      </div>
-    </div>
   );
 }
 
