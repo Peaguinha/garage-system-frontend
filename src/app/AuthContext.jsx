@@ -1,5 +1,6 @@
 import { createContext, useEffect, useMemo, useState } from "react";
 import { api, setAuthToken } from "../shared/api/client";
+import { setGraphqlAuthToken } from "../shared/api/graphqlClient";
 
 // { nome, email, id, role: "ADMIN" | "ATENDENTE" | "MECANICO" }
 export const AuthContext = createContext(null);
@@ -33,6 +34,7 @@ export function AuthProvider({ children }) {
   // logo após recarregar a página com uma sessão salva.
   useEffect(() => {
     setAuthToken(session?.token ?? null);
+    setGraphqlAuthToken(session?.token ?? null);
   }, [session]);
 
   async function login(email, senha) {
