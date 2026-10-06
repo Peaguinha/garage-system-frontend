@@ -1,5 +1,6 @@
 import { createContext, useEffect, useMemo, useState } from "react";
 import { api, setAuthToken } from "../shared/api/client";
+import { setGraphqlAuthToken } from "../shared/api/graphqlClient";
 
 // { nome, email, id, role: "ADMIN" | "ATENDENTE" | "MECANICO" }
 export const AuthContext = createContext(null);
@@ -24,15 +25,26 @@ function persistSession(session) {
   }
 }
 
+function applyToken(token) {
+  setAuthToken(token);
+  setGraphqlAuthToken(token);
+}
+
 export function AuthProvider({ children }) {
-  const [session, setSession] = useState(() => loadStoredSession());
+  // The token must reach the API clients before any child effect runs: React runs
+  // child effects before parent effects, so setting it only in an effect would
+  // send the first request of a page without Authorization after a reload.
+  const [session, setSession] = useState(() => {
+    const stored = loadStoredSession();
+    applyToken(stored?.token ?? null);
+    return stored;
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Garante que toda chamada à API já saia com o token certo, inclusive
-  // logo após recarregar a página com uma sessão salva.
+  // Keeps the clients in sync after login/logout.
   useEffect(() => {
-    setAuthToken(session?.token ?? null);
+    applyToken(session?.token ?? null);
   }, [session]);
 
   async function login(email, senha) {

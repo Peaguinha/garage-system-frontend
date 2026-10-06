@@ -8,7 +8,7 @@ Plano completo (stack, estrutura, divisão de features por pessoa): ver **Garage
 
 ```bash
 npm install
-cp .env.example .env   # ajuste VITE_API_URL se o backend não estiver em localhost:3000
+cp .env.example .env   # ajuste VITE_API_URL / VITE_GRAPHQL_URL se o backend não estiver em localhost:3000
 npm run dev
 ```
 
@@ -33,3 +33,5 @@ src/
 ## Estado atual
 
 O shell (login, layout, tema, roteamento, guarda de papel) está funcional e consumindo `POST /api/auth/login` de verdade. As demais telas (Dashboard, Clientes, Veículos, Ordens de Serviço, Serviços, Peças, Usuários) estão como placeholder — cada uma já roteada e com a feature/responsável indicados na própria tela — prontas para cada pessoa da equipe substituir pelo conteúdo real, seguindo o protótipo V2.
+
+A tela de **Usuários** (F6, restrita a ADMIN) já está implementada: como o backend não expõe rota REST para usuários, ela consome a query GraphQL `usuarios` (`VITE_GRAPHQL_URL`, cliente em `src/shared/api/graphqlClient.js`) com o mesmo JWT do login.
