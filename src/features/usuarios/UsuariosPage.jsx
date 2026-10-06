@@ -73,7 +73,7 @@ export default function UsuariosPage() {
       <div className="view-header">
         <div>
           <h1>Usuários</h1>
-          <div className="desc">Equipe com acesso ao sistema.</div>
+          <div className="desc">Consulta restrita ao perfil ADMIN.</div>
         </div>
       </div>
 
