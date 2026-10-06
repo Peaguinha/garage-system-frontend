@@ -77,11 +77,11 @@ export default function PecaFormModal({ open, onClose, onSaved, peca }) {
         <div className="field-row">
           <div className="field">
             <label htmlFor="pecaCodigo">Código</label>
-            <input id="pecaCodigo" value={form.codigo} onChange={set("codigo")} required placeholder="FLT001" />
+            <input id="pecaCodigo" value={form.codigo} onChange={set("codigo")} placeholder="FLT001" />
           </div>
           <div className="field">
             <label htmlFor="pecaFabricante">Fabricante</label>
-            <input id="pecaFabricante" value={form.fabricante} onChange={set("fabricante")} required placeholder="Bosch" />
+            <input id="pecaFabricante" value={form.fabricante} onChange={set("fabricante")} placeholder="Bosch" />
           </div>
         </div>
         <div className="field-row">
