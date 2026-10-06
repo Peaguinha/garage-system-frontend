@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import Icon from "../../shared/components/Icon";
+import ToastStack from "../../shared/components/ToastStack";
+import { useToast } from "../../shared/hooks/useToast";
 import { useAuth, can } from "../../shared/hooks/useAuth";
 import { usuariosApi } from "./usuariosApi";
+import UsuarioFormModal from "./UsuarioFormModal";
 
 const ROLE_LABEL = {
   ADMIN: "Admin",
@@ -22,6 +25,10 @@ export default function UsuariosPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
+  const [reloadKey, setReloadKey] = useState(0);
+  const [formOpen, setFormOpen] = useState(false);
+
+  const { toasts, showToast } = useToast();
 
   useEffect(() => {
     if (!isAdmin) return undefined;
@@ -30,7 +37,10 @@ export default function UsuariosPage() {
     usuariosApi
       .list()
       .then((data) => {
-        if (!cancelled) setUsuarios(data);
+        if (!cancelled) {
+          setUsuarios(data);
+          setError(null);
+        }
       })
       .catch((err) => {
         if (!cancelled) setError(err.message);
@@ -42,13 +52,18 @@ export default function UsuariosPage() {
     return () => {
       cancelled = true;
     };
-  }, [isAdmin]);
+  }, [isAdmin, reloadKey]);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     if (!q) return usuarios;
     return usuarios.filter((u) => u.nome?.toLowerCase().includes(q) || u.email?.toLowerCase().includes(q));
   }, [usuarios, search]);
+
+  function handleSaved() {
+    showToast("Usuário cadastrado com sucesso.");
+    setReloadKey((k) => k + 1);
+  }
 
   if (!isAdmin) {
     return (
@@ -75,6 +90,10 @@ export default function UsuariosPage() {
           <h1>Usuários</h1>
           <div className="desc">Consulta restrita ao perfil ADMIN.</div>
         </div>
+        <button type="button" className="btn btn-primary" onClick={() => setFormOpen(true)}>
+          <Icon name="plus" />
+          Novo usuário
+        </button>
       </div>
 
       <div className="search-box" style={{ marginBottom: "1.1rem", maxWidth: 360 }}>
@@ -124,6 +143,10 @@ export default function UsuariosPage() {
           ))}
         </div>
       )}
+
+      {formOpen && <UsuarioFormModal onClose={() => setFormOpen(false)} onSaved={handleSaved} />}
+
+      <ToastStack toasts={toasts} />
     </section>
   );
 }
