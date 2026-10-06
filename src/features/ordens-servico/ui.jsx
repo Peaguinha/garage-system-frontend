@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import Icon from "../../shared/components/Icon";
-import { STATUS_LABEL } from "./ordensApi";
+import { STATUS_LABEL, codigoOrdem, fmtDate, fmtMoney, totais } from "./ordensApi";
 
 // Se outra feature (Clientes/Veículos, Peças...) precisar destes componentes,
 // o certo é mover para src/shared/components/ — ver "Regra de ouro" no README.
+// O Dashboard reaproveita Plate, StatusPill e LinhaOrdem daqui.
 
 export function Plate({ placa }) {
   return (
@@ -19,6 +20,41 @@ export function StatusPill({ status }) {
       <span className="dot" />
       {STATUS_LABEL[status]}
     </span>
+  );
+}
+
+// Linha da tabela de ordens (colunas: OS, Veículo, Proprietário, Mecânico, Status, Valor, Data).
+export function LinhaOrdem({ ordem, onAbrir }) {
+  const { total } = totais(ordem);
+  const v = ordem.veiculo;
+  return (
+    <div className="drow drow-body clickable" onClick={onAbrir}>
+      <div className="dcell mono dcell-title">{codigoOrdem(ordem.id)}</div>
+      <div className="dcell">
+        <span className="lbl">Veículo</span>
+        {v && <Plate placa={v.placa} />} <span className="dcell-sub">{v ? `${v.marca} ${v.modelo}` : ""}</span>
+      </div>
+      <div className="dcell">
+        <span className="lbl">Proprietário</span>
+        {v?.cliente?.nome ?? "—"}
+      </div>
+      <div className="dcell">
+        <span className="lbl">Mecânico</span>
+        {ordem.mecanico?.nome ?? "—"}
+      </div>
+      <div className="dcell">
+        <span className="lbl">Status</span>
+        <StatusPill status={ordem.status} />
+      </div>
+      <div className="dcell mono tabular">
+        <span className="lbl">Valor</span>
+        {fmtMoney(total)}
+      </div>
+      <div className="dcell dcell-sub">
+        <span className="lbl">Data</span>
+        {fmtDate(ordem.dataAbertura)}
+      </div>
+    </div>
   );
 }
 

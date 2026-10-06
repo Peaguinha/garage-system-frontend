@@ -5,11 +5,9 @@ import ToastStack from "../../shared/components/ToastStack";
 import { useToast } from "../../shared/hooks/useToast";
 import { useAuth, can } from "../../shared/hooks/useAuth";
 import { formatMoney } from "../../shared/utils/format";
+import { isLowStock } from "../../shared/utils/stock";
 import { pecasApi } from "./pecasApi";
 import PecaFormModal from "./PecaFormModal";
-
-// Same threshold the V2 prototype and the dashboard KPI use for "low stock".
-const LOW_STOCK_THRESHOLD = 5;
 
 // Feature F5 (parts half) — everyone can read the stock; the backend
 // restricts POST/PUT/DELETE /api/pecas to ADMIN, so the UI hides those
@@ -142,7 +140,7 @@ export default function PecasPage() {
           )}
 
           {filtered.map((p) => {
-            const lowStock = p.quantidadeDisponivel < LOW_STOCK_THRESHOLD;
+            const lowStock = isLowStock(p.quantidadeDisponivel);
             return (
               <div className="drow drow-body" key={p._id}>
                 <div className="dcell dcell-title">
