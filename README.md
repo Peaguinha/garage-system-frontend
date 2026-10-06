@@ -33,6 +33,12 @@ All screenshots were captured at 1440 x 900 (and 390 x 844 for mobile) against a
 
 Sign-in with e-mail and password. A successful login stores a JWT session and redirects to the application; routes are protected and unauthenticated visitors are sent back to the login screen.
 
+### Dashboard
+
+The home screen summarizes the workshop: open orders, orders in execution, completed orders, revenue from completed orders and the number of parts with low stock, followed by the orders per status and the six latest service orders. Administrators and attendants also get shortcuts to register a customer or open a service order.
+
+![Dashboard](docs/screenshots/dashboard.png)
+
 ### Service orders
 
 The service order is the core module. It offers a kanban board, where a card can be dragged to the next column to advance its status, and a list view.
@@ -77,13 +83,6 @@ The navigation adapts to the signed-in role. The example below shows the mechani
 
 ![Mechanic profile navigation](docs/screenshots/role-mechanic.png)
 
-### Dashboard
-
-The dashboard module is under development and its screenshot will be added here when it is merged.
-
-<!-- When the dashboard is merged, save the capture as docs/screenshots/dashboard.png and replace the image below. -->
-![Dashboard screenshot pending](docs/screenshots/dashboard-placeholder.svg)
-
 ### Responsive layout
 
 On small screens the sidebar becomes a drawer and the four most used destinations move to a bottom navigation bar.
@@ -101,7 +100,7 @@ On small screens the sidebar becomes a drawer and the four most used destination
 | Module | Description | Data source |
 | --- | --- | --- |
 | Authentication | E-mail and password login, persisted JWT session, protected routes and role-based navigation | REST |
-| Dashboard | Operational overview. Under development | REST |
+| Dashboard | Operational overview with KPIs, orders per status and the latest service orders | GraphQL for orders, REST for parts |
 | Service orders | Kanban and list views, order creation, status flow with drag and drop, diagnosis, services and parts, financial summary | GraphQL for reads, REST for writes |
 | Customers | Registration with search, inline details and linked vehicles | REST |
 | Vehicles | Registration linked to a customer, with search | REST |
@@ -231,6 +230,7 @@ The backend is a separate repository: [garage-system-backend](https://github.com
 | Parts | `GET`, `POST /api/pecas` and `PUT`, `DELETE /api/pecas/:id` |
 | Service orders (write) | `POST /api/ordens-servico`, `PUT /api/ordens-servico/:id` (diagnosis), `PATCH` on `/status`, `/servicos` and `/pecas` |
 | Service orders (read) | GraphQL `ordensServico`, `ordemServico`, `servicos`, `pecas` and `veiculos` |
+| Dashboard | GraphQL `ordensServico` and `GET /api/pecas` |
 
 ## Project structure
 
@@ -239,7 +239,7 @@ src/
   app/                      Routes, layout, navigation and auth context
   features/
     auth/                   Login
-    dashboard/              Dashboard (under development)
+    dashboard/              Dashboard: KPIs, status overview, latest orders
     clientes/               Customers
     veiculos/               Vehicles
     ordens-servico/         Service orders: kanban, list, detail
@@ -275,7 +275,6 @@ A module is considered done when it follows the visual reference of the prototyp
 
 ## Known limitations
 
-- The dashboard module is not merged yet.
 - Services and parts can be added to a service order but not removed, because the backend has no route for it.
 - The backend does not apply role restrictions to the service order routes, so those restrictions currently exist only in the interface.
 - Users can be listed and created, but not edited or deleted, because the backend does not expose those operations.
