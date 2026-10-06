@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900" role="img" aria-label="Dashboard screenshot pending">
+  <title>Dashboard screenshot pending</title>
+  <rect width="1440" height="900" fill="#0F1214"/>
+  <rect x="48" y="48" width="1344" height="804" rx="20" fill="none" stroke="#2A3138" stroke-width="2" stroke-dasharray="14 10"/>
+  <text x="720" y="430" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="44" font-weight="700" fill="#E8ECEF" letter-spacing="1">DASHBOARD</text>
+  <text x="720" y="486" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#8A949C">Screenshot pending: the module is under development</text>
+  <text x="720" y="528" text-anchor="middle" font-family="Courier New, monospace" font-size="20" fill="#FF7A33">docs/screenshots/dashboard.png</text>
+</svg>
